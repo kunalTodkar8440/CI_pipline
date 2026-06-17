@@ -14,7 +14,7 @@ jobs:
 
       - name: Build images
         run: |
-          docker build .github/workflows/frontendfile -t ${{ secrets.DOCKER_USERNAME }}/docker_image_push_gh:dev
+          docker build /frontendfile -t ${{ secrets.DOCKER_USERNAME }}/docker_image_push_gh:dev
 
       - name: Push images to Docker Hub
         run: |
