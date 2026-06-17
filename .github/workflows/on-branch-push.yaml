@@ -1,0 +1,11 @@
+name: main branch code push tigger
+
+on:
+  push:
+   branches:
+      - CI_branch
+jobs:
+  job-1:
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo "hello from the auto tigeer main branch"
