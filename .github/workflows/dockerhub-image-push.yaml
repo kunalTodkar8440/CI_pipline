@@ -1,0 +1,22 @@
+name: this for the building pushing image dockerhub
+
+on:
+  push:
+    branches:
+      - CI_branch
+jobs:
+  publish_images:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build images
+        run: |
+          docker build ./frontendfile -t ${{ secrets.DOCKER_USERNAME }}/docker_image_push_gh:dev
+
+      - name: Push images to Docker Hub
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_HUB_TOKEN }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/docker_image_push_gh:dev
