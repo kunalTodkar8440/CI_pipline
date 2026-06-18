@@ -1,0 +1,27 @@
+name: docker major project image push using github action 
+
+on:
+  push:
+    branches:
+      - CI_branch
+jobs:
+  publish_images:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build images
+        run: |
+          docker build ./docker-major-project/frontend -t ${{ secrets.DOCKER_HUB_USERNAME }}/major-project-frontend:dev
+          docker build ./docker-major-project/backend -t ${{ secrets.DOCKER_HUB_USERNAME }}/major-project-backend:dev
+          docker build ./docker-major-project/database -t ${{ secrets.DOCKER_HUB_USERNAME }}/major-project-database:dev
+
+      - name: Push images to Docker Hub
+        run: |
+          docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_TOKEN }}
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/major-project-frontend:dev
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/major-project-backend:dev
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/major-project-database:dev
+
