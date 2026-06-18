@@ -14,14 +14,14 @@ jobs:
 
       - name: Build images
         run: |
-          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/major-project-frontend:dev ./docker-major-project/frontend 
-          docker build  -t ${{ secrets.DOCKER_HUB_USERNAME }}/major-project-backend:dev  ./docker-major-project/backend
-          docker build  -t ${{ secrets.DOCKER_HUB_USERNAME }}/major-project-database:dev  ./docker-major-project/database
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/major-project-frontend:dev /docker-major-project/frontend 
+          docker build  -t ${{ secrets.DOCKER_USERNAME }}/major-project-backend:dev  ./docker-major-project/backend
+          docker build  -t ${{ secrets.DOCKER_USERNAME }}/major-project-database:dev  ./docker-major-project/database
 
       - name: Push images to Docker Hub
         run: |
-          docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_TOKEN }}
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/major-project-frontend:dev
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/major-project-backend:dev
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/major-project-database:dev
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_HUB_TOKEN }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/major-project-frontend:dev
+          docker push ${{ secrets.DOCKER_USERNAME }}/major-project-backend:dev
+          docker push ${{ secrets.DOCKER_USERNAME }}/major-project-database:dev
 
